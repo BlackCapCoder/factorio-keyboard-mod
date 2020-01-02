@@ -8,7 +8,6 @@ require ('utils.flashlight')
 -- require ('utils.inventory')
 
 require ('utils.fuelNearby')
--- require ('utils.equalize')
 require ('utils.craftingQueue')
 require ('utils.jumplist')
 require ('utils.warp')
@@ -19,7 +18,7 @@ require ('utils.related')
 
 ------------- Yank selected
 
-script.on_event("yank-selected", function (ev)
+function yankSelected ()
   local sel = pl.selected
   if sel == nil then return end
 
@@ -33,7 +32,9 @@ script.on_event("yank-selected", function (ev)
   _setCursor (item)
 
   updateCursorStack ()
-end)
+end
+
+script.on_event("yank-selected", yankSelected)
 
 
 ------------- Cursor history
@@ -150,13 +151,12 @@ nmapf ('u', function ()
 end)
 
 
-onEvent (defines.events.on_built_entity, function (ev)
-  pl.selected = ev.created_entity
-end)
-
 
 ------------
 
+-- onEvent (defines.events.on_built_entity, function (ev)
+--   pl.selected = ev.created_entity
+-- end)
 
 -- local inv
 --
