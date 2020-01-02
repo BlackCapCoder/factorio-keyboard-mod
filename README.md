@@ -122,9 +122,20 @@ so that I can have fancy keybinds.
 Toggle between vanilla queue to back and the new queue to front order.
 
 
-Unlike the original "queue to back" mod, if an new item is added to the queue
-while something else is being crafted, I wait for one crafting operation
-to complete before re-queuing, to not lose invested crafting time.
+Unlike the original "queue to back" mod, if a new item is added to the queue
+while something else is being crafted I wait for one crafting operation
+to complete before re-queuing- otherwise we would lose progress on the former
+front of the queue!
+
+
+Imagine ordering red science (super slow), and then figuring out that, in fact,
+you also need laboratories; preferably before the science packs.
+You throw the laboratories on the front of the queue, but, oh no- we just lost 4
+seconds of crafting time that we had *invested* into the science pack. Heartbreaking!
+
+
+You rush to the mod author and give him a friendly middle finger, and I think they might
+have fixed this upstream now.
 
 
 # windowzipper.lua
