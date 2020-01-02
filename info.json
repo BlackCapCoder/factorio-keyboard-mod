@@ -1,0 +1,11 @@
+{
+    "name": "Keyboard",
+    "version": "0.1.0",
+    "title": "Keyboard",
+    "author": "blackcap",
+    "contact": "",
+    "homepage": "",
+    "factorio_version": "0.17",
+    "dependencies": ["base >= 0.17"],
+    "description": "Using the mouse sucks"
+}
