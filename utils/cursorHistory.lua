@@ -12,6 +12,7 @@ end
 
 local cursorLog      = WindowZipper (10, compare)
 cursorLog.isBrowsing = false
+local expectGhost    = nil
 
 ---
 
@@ -40,15 +41,23 @@ end
 
 function updateCursorStack ()
   local cursor = _getCursor ()
+  local focal  = cursorLog.getCursor ()
 
   -- Cursor cleared
   if not cursor then
-    cursorLog.isBrowsing = false
+    if focal and expectGhost and focal.name == expectGhost.name then
+      _setCursor (focal)
+    else
+      cursorLog.isBrowsing = false
+    end
+    expectGhost = nil
     return
   end
 
+  expectGhost = nil
+
   -- Browsing
-  if compare (cursor, cursorLog.getCursor()) then
+  if compare (cursor, focal) then
     return
   end
 
@@ -134,8 +143,31 @@ onEvent (defines.events.on_player_cursor_stack_changed, updateCursorStack)
 
 onEvent (defines.events.on_built_entity, function (ev)
   if not ev.stack.valid_for_read then return end
+
+  -- If the player run out of items we want to replace the
+  -- cursor stack with a ghost, rather than clearing it.
+  if ev.stack.count == 1 then
+    expectGhost = ev.stack.prototype
+  end
+
   cursorLog.pushOrPromote (ev.stack.prototype)
   render()
+end)
+
+-- If we are holding the ghost of an item that we then pick up
+-- replace the ghost with the real deal
+onEvent (defines.events.on_player_main_inventory_changed, function (ev)
+  if not cursorLog.isBrowsing then return end
+  if not pl.cursor_ghost then return end
+
+  local stack
+    = pl.get_main_inventory()
+    . find_item_stack (pl.cursor_ghost.name)
+
+  if not stack then return end
+
+  pl.cursor_ghost = nil
+  pl.cursor_stack.swap_stack (stack)
 end)
 
 onEvent (defines.events.on_pre_player_crafted_item, function (ev)

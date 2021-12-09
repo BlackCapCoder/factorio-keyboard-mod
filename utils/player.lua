@@ -73,7 +73,7 @@ end
 
 function setCursor (item)
   if item == nil then
-    pl.clean_cursor ()
+    -- pl.clean_cursor ()
     return
   end
 
@@ -88,7 +88,7 @@ end
 
 function _setCursor (stack)
   if not stack then
-    pl.clean_cursor ()
+    -- pl.clean_cursor ()
     return
   end
 
@@ -97,7 +97,7 @@ function _setCursor (stack)
     . find_item_stack (stack.name)
 
   if not _stack then
-    pl.clean_cursor ()
+    -- pl.clean_cursor ()
     pl.cursor_ghost = stack
   else
     pl.cursor_ghost = nil

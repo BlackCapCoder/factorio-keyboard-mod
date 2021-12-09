@@ -147,10 +147,12 @@ nmapf ('gt', function ()
 end)
 
 nmapf ('u', function ()
-  pl.opened = pl
+  if pl.opened_self then
+    pl.opened = nil
+  else
+    pl.opened = pl
+  end
 end)
-
-
 
 ------------
 
@@ -187,3 +189,29 @@ end)
 --   inv.moveSelUp ()
 -- end)
 
+-- onEvent (defines.events.on_put_item, function (ev)
+--   if not pl.cursor_stack or not pl.cursor_stack.valid_for_read then return end
+--   local st = pl.cursor_stack.prototype
+--   if st.subgroup.name ~= 'belt' then return end
+--   pl.clean_cursor()
+--   pl.cursor_ghost = st;
+--   -- pl.print("put")
+-- end)
+
+-- onEvent (defines.events.on_built_entity, function (ev)
+--   if not ev.stack or not ev.stack.valid_for_read then return end
+--   local st = ev.stack.prototype
+--   -- if st.subgroup.name ~= 'belt' then return end
+--   -- ev.created_entity.direction = 0
+--   pl.print(ev.stack.count)
+-- end)
+
+-- onEvent (defines.events.on_selected_entity_changed, function (ev)
+--   if not pl then return end
+--   if pl.selected then return end
+--   if not pl.cursor_stack or not pl.cursor_stack.valid_for_read then return end
+--   local st = pl.cursor_stack.prototype
+--   if st.subgroup.name ~= 'belt' then return end
+--   pl.print("selected")
+--   -- pl.build_from_cursor({position = pl.selected.position})
+-- end)

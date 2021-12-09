@@ -2,6 +2,18 @@ This is an opinionated collection of random convenience features for the game fa
 with the common goal of making the game more accessible by keyboard.
 
 
+# Intentionally unused keys
+
+The default key bindings are heavily vi-inspired, but some are a bit weird; the
+following keys are intentionally not used: `h`, `j`, `k`, `l`, `;`, `a`, `s`, `d`, `f`, `e`
+
+The reason for this is simply that I use `esdf` for player movement (`wasd` shifted to the right),
+`hjkl` to move the mouse pointer and `;`/`a` to left/right click.
+
+It doesn't really matter, but I figured I should explain that this is a deliberate design choice.
+
+----
+
 # keys.lua
 
 Factorio's keybinding system sucks. Every keybinding has to be
@@ -288,7 +300,6 @@ Each line represent one `E` press
    ###    # #   ##@
 ```
 
-
 #### WarpShort - `w`
 
 Move the player exactly 20 tiles forward in the direction
@@ -296,3 +307,4 @@ they are facing. If this would move them inside a solid object, continue moving 
 
 
 In Vim terms this would be approximately `20le`- It is a conveniently short jump that doesn't trap you inside a rock
+
