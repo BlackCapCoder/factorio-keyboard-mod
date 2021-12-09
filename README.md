@@ -308,3 +308,41 @@ they are facing. If this would move them inside a solid object, continue moving 
 
 In Vim terms this would be approximately `20le`- It is a conveniently short jump that doesn't trap you inside a rock
 
+
+#### Invariant
+
+`W` and `E` consider belts to be "solid objects". The rationale for this is the use-case of jumping
+between belts on the bus, or standing on top of a long stretch of belts and pressing `E` to get
+to the very end.
+
+Example use-case:
+
+```
+@>>>>>>>>v
+         v
+         v
+         v
+         v
+         >>>>>>>>
+
+
+(face right and press E)
+
+>>>>>>>>>v@
+         v
+         v
+         v
+         v
+         >>>>>>>>
+
+
+(face down and press W)
+
+>>>>>>>>>v
+         v
+         v
+         v
+         v@
+         >>>>>>>>
+```
+
